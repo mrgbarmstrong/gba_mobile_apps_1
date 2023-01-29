@@ -16,8 +16,8 @@ private val LightColorPalette = lightColors(
     primary = TechGold,
     primaryVariant = BuzzGold,
     secondary = TechNavy,
-    background = LightGrey
-
+    background = LightGrey,
+    onPrimary = White
 )
 
 @Composable

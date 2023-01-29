@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">GT Living Info</string>
+    <string name="submit_text">Submit</string>
+    <string name="fname">First Name</string>
+    <string name="lname">Last Name</string>
+    <string name="on_campus">Do you live on- or off-Campus?</string>
+    <string name="housing_name">Apartment or Dorm Name</string>
+    <string name="floor">Floor Number (0–99)</string>
 </resources>
