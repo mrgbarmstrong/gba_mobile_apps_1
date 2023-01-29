@@ -1,5 +1,6 @@
 package com.example.gbamobileapps1
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -21,8 +22,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.gbamobileapps1.ui.theme.GBAMobileApps1Theme
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
+import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : ComponentActivity() {
+
+    private val signInLauncher = registerForActivityResult(
+        FirebaseAuthUIActivityResultContract()
+    ) { res ->
+        this.onSignInResult(res)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -33,7 +45,37 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
+        val auth = FirebaseAuth.getInstance()
+
+        if (auth.currentUser == null) {
+            val providers = arrayListOf(
+                AuthUI.IdpConfig.EmailBuilder().build(),
+                AuthUI.IdpConfig.GoogleBuilder().build())
+
+            val signInIntent = AuthUI.getInstance()
+                .createSignInIntentBuilder()
+                .setAvailableProviders(providers)
+                .setLogo(R.drawable.ga_tech_logo) // Set logo drawable
+                .build()
+            signInLauncher.launch(signInIntent)
+        }
     }
+
+    private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
+        val response = result.idpResponse
+        if (result.resultCode == RESULT_OK) {
+            val user = FirebaseAuth.getInstance().currentUser
+        } else {
+            if (response == null) {
+                //User Cancels
+            } else {
+                //Get Response Code
+            }
+        }
+    }
+
+
 }
 
 @Composable
@@ -70,7 +112,7 @@ fun InfoInput(modifier: Modifier = Modifier) {
             Text(
                 text = stringResource(R.string.submit_text))
         }
-        //Text Fields Here
+        /*Text Fields Here*/
     }
 }
 

@@ -1,0 +1,42 @@
+[debug] [2023-01-29T17:14:23.472Z] ----------------------------------------------------------------------
+[debug] [2023-01-29T17:14:23.479Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\algeb\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2023-01-29T17:14:23.481Z] CLI Version:   11.21.0
+[debug] [2023-01-29T17:14:23.482Z] Platform:      win32
+[debug] [2023-01-29T17:14:23.482Z] Node Version:  v16.13.2
+[debug] [2023-01-29T17:14:23.486Z] Time:          Sun Jan 29 2023 12:14:23 GMT-0500 (Eastern Standard Time)
+[debug] [2023-01-29T17:14:23.487Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-01-29T17:14:23.520Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-01-29T17:14:23.522Z] > authorizing via signed-in user (mrgbarmstrong@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\algeb\AndroidStudioProjects\GBAMobileApps1
+
+[debug] [2023-01-29T17:16:35.719Z] ----------------------------------------------------------------------
+[debug] [2023-01-29T17:16:35.722Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\algeb\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2023-01-29T17:16:35.723Z] CLI Version:   11.21.0
+[debug] [2023-01-29T17:16:35.723Z] Platform:      win32
+[debug] [2023-01-29T17:16:35.723Z] Node Version:  v16.13.2
+[debug] [2023-01-29T17:16:35.725Z] Time:          Sun Jan 29 2023 12:16:35 GMT-0500 (Eastern Standard Time)
+[debug] [2023-01-29T17:16:35.725Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-01-29T17:16:35.738Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-01-29T17:16:35.739Z] > authorizing via signed-in user (mrgbarmstrong@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\algeb\AndroidStudioProjects\GBAMobileApps1
+

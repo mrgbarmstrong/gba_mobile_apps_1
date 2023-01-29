@@ -6,4 +6,5 @@
     <string name="on_campus">Do you live on- or off-Campus?</string>
     <string name="housing_name">Apartment or Dorm Name</string>
     <string name="floor">Floor Number (0–99)</string>
+    <string name="welcome">Welcome to the GT Survey App</string>
 </resources>
