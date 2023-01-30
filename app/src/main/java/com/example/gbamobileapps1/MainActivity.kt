@@ -14,10 +14,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,8 +26,8 @@ import com.example.gbamobileapps1.ui.theme.GBAMobileApps1Theme
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 
 class MainActivity : ComponentActivity() {
 
@@ -35,13 +36,14 @@ class MainActivity : ComponentActivity() {
     ) { res ->
         this.onSignInResult(res)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             GBAMobileApps1Theme(darkTheme = false){
                 Surface(modifier = Modifier
                         .background(color = MaterialTheme.colors.background)) {
-                    GTInfoApp()
+                    HomePage()
                 }
             }
         }
@@ -57,8 +59,13 @@ class MainActivity : ComponentActivity() {
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
                 .setLogo(R.drawable.ga_tech_logo) // Set logo drawable
+                .setTheme(R.style.Theme_GBAMobileApps1)
                 .build()
             signInLauncher.launch(signInIntent)
+        } else {
+             val surveyIntent = Intent(this, SurveyActivity::class.java)
+             startActivity(surveyIntent)
+             finish()
         }
     }
 
@@ -66,64 +73,33 @@ class MainActivity : ComponentActivity() {
         val response = result.idpResponse
         if (result.resultCode == RESULT_OK) {
             val user = FirebaseAuth.getInstance().currentUser
+            startActivity(Intent(this, SurveyActivity::class.java));
+            finish()
         } else {
-            if (response == null) {
-                //User Cancels
-            } else {
-                //Get Response Code
-            }
         }
     }
-
-
 }
 
-@Composable
-fun TopAppBar(modifier: Modifier = Modifier) {
-    Row (modifier = modifier
-        .background(color = MaterialTheme.colors.primary)
-        .fillMaxWidth()
-        .height(50.dp)
-        .padding(8.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ){
-        Image(
-            painter = painterResource(id = R.drawable.ga_tech_logo),
-            contentDescription = null,
-            contentScale = ContentScale.Fit,
-            modifier = modifier.size(50.dp)
-        )
-
-        Text(
-            text = stringResource(R.string.app_name),
-            style = TextStyle(fontSize = 20.sp,
-                color = MaterialTheme.colors.onPrimary)
-        )
-    }
-}
-
-@Composable
-fun InfoInput(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Button(onClick = { /*TODO*/ }) {
-            Text(
-                text = stringResource(R.string.submit_text))
-        }
-        /*Text Fields Here*/
-    }
-}
 
 @Preview
 @Composable
-fun GTInfoApp() {
+fun HomePage() {
     GBAMobileApps1Theme {
-        TopAppBar()
-        InfoInput(modifier = Modifier
+        val current_context = LocalContext.current
+
+        Column(Modifier
             .fillMaxSize()
-            .wrapContentSize(Alignment.Center)
-        )
+            .background(MaterialTheme.colors.background),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center){
+            Image(
+                painter = painterResource(id = R.drawable.ga_tech_logo),
+                contentDescription = null,
+                modifier = Modifier.size(200.dp))
+            Text(text = stringResource(R.string.welcome),
+                style = TextStyle(fontSize = 30.sp,
+                    color = MaterialTheme.colors.secondary,
+                    textAlign = TextAlign.Center))
+        }
     }
 }
