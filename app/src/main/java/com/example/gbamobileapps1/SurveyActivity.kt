@@ -77,7 +77,7 @@ fun TopAppBar(modifier: Modifier = Modifier) {
 @Composable
 fun InfoInput(modifier: Modifier = Modifier) {
     val current_context = LocalContext.current
-    val main_intent = Intent(current_context, SurveyActivity::class.java)
+    val main_intent = Intent(current_context, MainActivity::class.java)
 
     Column(
         modifier = modifier

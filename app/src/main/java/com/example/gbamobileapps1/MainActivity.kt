@@ -26,6 +26,7 @@ import com.example.gbamobileapps1.ui.theme.GBAMobileApps1Theme
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
@@ -48,15 +49,17 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        val auth = FirebaseAuth.getInstance()
+        var auth = FirebaseAuth.getInstance()
+        var current_user = auth.getCurrentUser()
 
-        if (auth.currentUser == null) {
+        if (current_user == null) {
             val providers = arrayListOf(
                 AuthUI.IdpConfig.EmailBuilder().build(),
                 AuthUI.IdpConfig.GoogleBuilder().build())
 
             val signInIntent = AuthUI.getInstance()
                 .createSignInIntentBuilder()
+                .setIsSmartLockEnabled(false)
                 .setAvailableProviders(providers)
                 .setLogo(R.drawable.ga_tech_logo) // Set logo drawable
                 .setTheme(R.style.Theme_GBAMobileApps1)
@@ -65,16 +68,14 @@ class MainActivity : ComponentActivity() {
         } else {
              val surveyIntent = Intent(this, SurveyActivity::class.java)
              startActivity(surveyIntent)
-             finish()
         }
     }
 
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
         val response = result.idpResponse
         if (result.resultCode == RESULT_OK) {
-            val user = FirebaseAuth.getInstance().currentUser
-            startActivity(Intent(this, SurveyActivity::class.java));
-            finish()
+            var user = FirebaseAuth.getInstance().currentUser
+            startActivity(Intent(this, SurveyActivity::class.java))
         } else {
         }
     }
