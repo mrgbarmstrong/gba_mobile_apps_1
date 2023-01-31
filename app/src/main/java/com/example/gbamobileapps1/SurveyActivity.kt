@@ -1,7 +1,9 @@
 package com.example.gbamobileapps1
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -26,6 +28,9 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat.startActivity
 import com.example.gbamobileapps1.ui.theme.GBAMobileApps1Theme
 import com.firebase.ui.auth.AuthUI
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class SurveyActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -142,14 +147,41 @@ fun InfoInput(modifier: Modifier = Modifier) {
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Button(onClick =  {
-                AuthUI.getInstance().signOut(current_context)
-                current_context.startActivity(main_intent)}
+                AuthUI.getInstance().signOut(current_context).addOnCompleteListener(
+                    OnCompleteListener { task ->
+                        when {
+                            task.isSuccessful -> {
+                                current_context.startActivity(main_intent)
+                            }
+                            else -> {
+                                Log.d(TAG, "Error Signing Out")
+                            }
+                        }
+                    }
+                )
+                }
             ) {
                 Text(
                     text = stringResource(R.string.logout)
                 )
             }
-            Button(onClick = {}) {
+            Button(onClick = {
+                val db = Firebase.firestore
+                val gt_student = hashMapOf(
+                    "first_name" to final_fname,
+                    "last_name" to final_lname,
+                    "housing_building" to final_housingName,
+                    "floor_num" to final_floornum
+                )
+                db.collection("users")
+                    .add(gt_student)
+                    .addOnSuccessListener { documentReference ->
+                        Log.d(TAG, "Successfully Added Record: ${documentReference.id}")
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w(TAG, "Failed to Update Firestore Database", e)
+                    }
+            }) {
                 Text(
                     text = stringResource(R.string.submit_text)
                 )
