@@ -7,11 +7,12 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -75,13 +76,70 @@ fun TopAppBar(modifier: Modifier = Modifier) {
 }
 
 @Composable
+fun OnOrOffRadio(modifier: Modifier) {
+
+}
+
+@Composable
 fun InfoInput(modifier: Modifier = Modifier) {
     val current_context = LocalContext.current
     val main_intent = Intent(current_context, MainActivity::class.java)
 
+
+
+    var fName by remember {mutableStateOf("")}
+    var lName by remember {mutableStateOf("")}
+    var housingName by remember {mutableStateOf("")}
+    var floorNum by remember {mutableStateOf("")}
+
+    val final_fname = fName
+    val final_lname = lName
+    val final_housingName = housingName
+    val final_floornum = floorNum.toIntOrNull() ?: -1
+
     Column(
-        modifier = modifier
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Text(
+            text = stringResource(R.string.howto),
+            fontSize = 24.sp
+        )
+
+        Spacer(Modifier.height(16.dp))
+
+        TextField(
+            label = { Text (stringResource(R.string.fname)) },
+            value = fName,
+            onValueChange = { fName = it }
+        )
+
+        Spacer(Modifier.height(16.dp))
+
+        TextField(
+            label = { Text (stringResource(R.string.lname)) },
+            value = lName,
+            onValueChange = { lName = it }
+        )
+
+        Spacer(Modifier.height(16.dp))
+
+        TextField(
+            label = { Text (stringResource(R.string.housing_name)) },
+            value = housingName,
+            onValueChange = { housingName = it }
+        )
+
+        Spacer(Modifier.height(16.dp))
+
+        TextField(
+            label = { Text (stringResource(R.string.floor)) },
+            value = floorNum,
+            onValueChange = { floorNum = it }
+        )
+
+        Spacer(Modifier.height(16.dp))
+
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Button(onClick =  {
                 AuthUI.getInstance().signOut(current_context)
