@@ -76,7 +76,10 @@ class MainActivity : ComponentActivity() {
         if (result.resultCode == RESULT_OK) {
             var user = FirebaseAuth.getInstance().currentUser
             startActivity(Intent(this, SurveyActivity::class.java))
+            finish()
         } else {
+            startActivity(Intent(this, SurveyActivity::class.java))
+            finish()
         }
     }
 }
