@@ -1,7 +1,12 @@
 package com.example.gbamobileapps1
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -33,6 +38,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class SurveyActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -101,6 +107,11 @@ fun InfoInput(modifier: Modifier = Modifier) {
     val final_lname = lName
     val final_housingName = housingName
     val final_floornum = floorNum.toIntOrNull() ?: -1
+
+    var mainSensorManager = LocalContext.current.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+    var pressure = mainSensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY)
+    var maxRange = pressure.maximumRange
+    var minRange = pressure.minDelay
 
     Column(
         modifier = modifier,
@@ -186,6 +197,15 @@ fun InfoInput(modifier: Modifier = Modifier) {
                     text = stringResource(R.string.submit_text)
                 )
             }
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text(
+                text = stringResource(R.string.sensMax),
+                fontSize = 16.sp
+            )
+            Text(
+                text = "$maxRange cm"
+            )
         }
     }
 }

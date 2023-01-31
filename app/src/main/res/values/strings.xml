@@ -11,4 +11,5 @@
     <string name="title_activity_survey">SurveyActivity</string>
     <string name="sign_error">Error Signing In. Please Try Again.</string>
     <string name="howto">Please Enter Your Information</string>
+    <string name="sensMax">The Max Range of Your Humidity Sensor Is: </string>
 </resources>
