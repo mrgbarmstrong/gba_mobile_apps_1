@@ -7,6 +7,7 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -195,6 +196,14 @@ fun InfoInput(modifier: Modifier = Modifier) {
             }) {
                 Text(
                     text = stringResource(R.string.submit_text)
+                )
+            }
+            Button(onClick = {
+                val veryImportantPSA = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwi5lZLmnfH8AhVXnYQIHT1KAUcQyCl6BAgeEAM&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdQw4w9WgXcQ&usg=AOvVaw0aHtehaphMhOCAkCydRLZU"))
+                current_context.startActivity(veryImportantPSA)
+            }) {
+                Text(
+                    text = stringResource(R.string.PSAtext)
                 )
             }
         }

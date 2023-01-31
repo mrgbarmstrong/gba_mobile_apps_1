@@ -12,4 +12,5 @@
     <string name="sign_error">Error Signing In. Please Try Again.</string>
     <string name="howto">Please Enter Your Information</string>
     <string name="sensMax">The Max Range of Your Humidity Sensor Is: </string>
+    <string name="PSAtext">Important PSA</string>
 </resources>
